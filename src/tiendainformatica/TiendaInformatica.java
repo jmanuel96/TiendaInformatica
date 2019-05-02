@@ -43,12 +43,12 @@ public class TiendaInformatica {
             System.out.println(categoria.getNombre());
 }
 
-//            Query queryProvinciaCadiz = em.createNamedQuery("Categorias.findByNombre");
-//            queryProvinciaCadiz.setParameter("nombre", "Cádiz");
-//            List<Categorias> listProvinciasCadiz = queryProvinciaCadiz.getResultList();
-//            for(Categorias provinciaCadiz : listProvinciasCadiz) {
-//                System.out.print(provinciaCadiz.getId() + ": ");
-//                System.out.println(provinciaCadiz.getNombre());
+//            Query queryCategoriasOrdenadores = em.createNamedQuery("Categorias.findByNombre");
+//            queryCategoriasOrdenadores.setParameter("nombre", "Ordenadores");
+//            List<Categorias> listordenadores = queryCategorias.getResultList();
+//            for(Categorias ordenadores : listCategorias) {
+//                System.out.print(Categorias.getId() + ": ");
+//                System.out.println(Categorias.getNombre());
 //}
         
         // Iniciar y finalizar transaciones
