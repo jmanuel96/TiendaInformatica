@@ -6,6 +6,8 @@
 package tiendainformatica;
 
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -22,11 +27,20 @@ import javafx.stage.Stage;
  */
 public class MainSceneBuilder extends Application {
     
+    private EntityManagerFactory emf;
+    private EntityManager em;   
+    
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TiendaView.fxml"));
         Parent sceneBuilder = fxmlLoader.load();
+        
+        emf = Persistence.createEntityManagerFactory("TiendaInformaticaPU");
+        em = emf.createEntityManager();
+        
+        TiendaViewController tiendaViewController = (TiendaViewController) fxmlLoader.getController(); 
         
         StackPane root = new StackPane();
         
@@ -38,6 +52,18 @@ public class MainSceneBuilder extends Application {
         primaryStage.show();
     }
 
+    @Override
+    public void stop() throws Exception {
+        em.close();
+        emf.close();
+        try{
+            DriverManager.getConnection("jdbc:derby:TiendaInformatica;shutdown=true"); 
+        } catch (SQLException ex){
+        }
+    }
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -45,4 +71,8 @@ public class MainSceneBuilder extends Application {
         launch(args);
     }
     
+    
+    
 }
+
+
