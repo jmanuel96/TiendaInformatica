@@ -6,6 +6,7 @@
 package tiendainformatica;
 
 import BaseDatos.Categorias;
+import BaseDatos.Productos;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -63,6 +64,8 @@ public class TiendaInformatica {
         consolas.setNombre("Consolas");
         Categorias televisores = new Categorias();
         televisores.setNombre("Televisores");
+        
+
         em.persist(ordenadores);
         em.persist(moviles);
         em.persist(consolas);

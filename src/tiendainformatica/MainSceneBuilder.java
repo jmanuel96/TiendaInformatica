@@ -40,7 +40,10 @@ public class MainSceneBuilder extends Application {
         emf = Persistence.createEntityManagerFactory("TiendaInformaticaPU");
         em = emf.createEntityManager();
         
-        TiendaViewController tiendaViewController = (TiendaViewController) fxmlLoader.getController(); 
+        TiendaViewController tiendaViewController = (TiendaViewController) fxmlLoader.getController();
+        
+        // Después de obtener el objeto del controlador y del EntityManager:
+        tiendaViewController.setEntityManager(em);
         
         StackPane root = new StackPane();
         

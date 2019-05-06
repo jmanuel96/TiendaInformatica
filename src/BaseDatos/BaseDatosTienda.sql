@@ -8,8 +8,18 @@
  * Created: 22-abr-2019
  */
 
-DROP TABLE Categorias;
 DROP TABLE Productos;
+DROP TABLE Categorias;
+
+
+CREATE TABLE Categorias(
+    IdCategoria INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, -- Id autonumérico
+    Nombre VARCHAR (30) NOT NULL,
+    Icono VARCHAR (30),
+    IdProducto INTEGER,
+    CONSTRAINT IdCategoria_Categorias_PK PRIMARY KEY (IdCategoria)
+);
+
 
 CREATE TABLE Productos(
     IdProducto INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, -- Id autonumérico
@@ -19,16 +29,7 @@ CREATE TABLE Productos(
     Precio DECIMAL (10,2),
     Foto VARCHAR (30),
     FechaSalida DATE,
-    CONSTRAINT IdProducto_Productos_PK PRIMARY KEY (IdProducto)
-);
-
-
-
-CREATE TABLE Categorias(
-    IdCategoria INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, -- Id autonumérico
-    Nombre VARCHAR (30) NOT NULL,
-    Icono VARCHAR (30),
-    IdProducto INTEGER NOT NULL,
-    CONSTRAINT IdCategoria_Categorias_PK PRIMARY KEY (IdCategoria),
-    CONSTRAINT IdProducto_Categorias_FK FOREIGN KEY (IdProducto) REFERENCES Productos (IdProducto)
+    IdCategoria INTEGER NOT NULL,
+    CONSTRAINT IdProducto_Productos_PK PRIMARY KEY (IdProducto),
+    CONSTRAINT IdCategoria_Productos_FK FOREIGN KEY (IdCategoria) REFERENCES Categorias (IdCategoria)
 );
