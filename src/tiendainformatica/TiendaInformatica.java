@@ -65,11 +65,20 @@ public class TiendaInformatica {
         Categorias televisores = new Categorias();
         televisores.setNombre("Televisores");
         
+        Productos smartphones = new Productos();
+        smartphones.setNombre("Smartphones");
+        Productos asus = new Productos();
+        asus.setNombre("Asus");
+        
 
         em.persist(ordenadores);
         em.persist(moviles);
         em.persist(consolas);
         em.persist(televisores);
+        
+        em.persist(smartphones);
+        em.persist(asus);
+        
         
         
         

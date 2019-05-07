@@ -44,6 +44,8 @@ public class MainSceneBuilder extends Application {
         
         // Después de obtener el objeto del controlador y del EntityManager:
         tiendaViewController.setEntityManager(em);
+        tiendaViewController.cargarTodosProductos();
+        
         
         StackPane root = new StackPane();
         
