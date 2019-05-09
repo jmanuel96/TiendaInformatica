@@ -29,7 +29,7 @@ CREATE TABLE Productos(
     Precio DECIMAL (10,2),
     Foto VARCHAR (30),
     FechaSalida DATE,
-    IdCategoria INTEGER NOT NULL,
+    IdCategoria INTEGER,
     CONSTRAINT IdProducto_Productos_PK PRIMARY KEY (IdProducto),
     CONSTRAINT IdCategoria_Productos_FK FOREIGN KEY (IdCategoria) REFERENCES Categorias (IdCategoria)
 );

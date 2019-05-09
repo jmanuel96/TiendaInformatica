@@ -6,18 +6,20 @@
 package BaseDatos;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Categorias.findAll", query = "SELECT c FROM Categorias c")
     , @NamedQuery(name = "Categorias.findByIdcategoria", query = "SELECT c FROM Categorias c WHERE c.idcategoria = :idcategoria")
     , @NamedQuery(name = "Categorias.findByNombre", query = "SELECT c FROM Categorias c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Categorias.findByIcono", query = "SELECT c FROM Categorias c WHERE c.icono = :icono")})
+    , @NamedQuery(name = "Categorias.findByIcono", query = "SELECT c FROM Categorias c WHERE c.icono = :icono")
+    , @NamedQuery(name = "Categorias.findByIdproducto", query = "SELECT c FROM Categorias c WHERE c.idproducto = :idproducto")})
 public class Categorias implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,9 +47,10 @@ public class Categorias implements Serializable {
     private String nombre;
     @Column(name = "ICONO")
     private String icono;
-    @JoinColumn(name = "IDPRODUCTO", referencedColumnName = "IDPRODUCTO")
-    @ManyToOne(optional = false)
-    private Productos idproducto;
+    @Column(name = "IDPRODUCTO")
+    private Integer idproducto;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcategoria")
+    private Collection<Productos> productosCollection;
 
     public Categorias() {
     }
@@ -84,12 +88,21 @@ public class Categorias implements Serializable {
         this.icono = icono;
     }
 
-    public Productos getIdproducto() {
+    public Integer getIdproducto() {
         return idproducto;
     }
 
-    public void setIdproducto(Productos idproducto) {
+    public void setIdproducto(Integer idproducto) {
         this.idproducto = idproducto;
+    }
+
+    @XmlTransient
+    public Collection<Productos> getProductosCollection() {
+        return productosCollection;
+    }
+
+    public void setProductosCollection(Collection<Productos> productosCollection) {
+        this.productosCollection = productosCollection;
     }
 
     @Override

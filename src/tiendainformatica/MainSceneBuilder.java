@@ -49,7 +49,7 @@ public class MainSceneBuilder extends Application {
         
         StackPane root = new StackPane();
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 900, 500);
         root.getChildren().add(sceneBuilder);
         
         primaryStage.setTitle("Tienda Informática");

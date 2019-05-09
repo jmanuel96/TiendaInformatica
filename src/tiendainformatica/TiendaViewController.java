@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +36,8 @@ public class TiendaViewController implements Initializable {
     private TableColumn<Productos, String> columnaDescripcion;
     @FXML
     private TableColumn<Productos, BigDecimal> columnaPrecio;
+    @FXML
+    private TableColumn<Productos, String> columnaCategoria;
     
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -49,12 +52,20 @@ public class TiendaViewController implements Initializable {
     columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
     columnaDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
     columnaPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+    columnaCategoria.setCellValueFactory(
+    cellData -> {
+        SimpleStringProperty property = new SimpleStringProperty();
+        if (cellData.getValue().getIdcategoria()!= null) {
+            property.setValue(cellData.getValue().getIdcategoria().getNombre());
+        }
+        return property;
+    });
     }    
     
-        public void cargarTodosProductos() {
-        Query queryProductosFindAll = entityManager.createNamedQuery("Productos.findAll");
-        List<Productos> listProductos = queryProductosFindAll.getResultList();
-        tablaViewProductos.setItems(FXCollections.observableArrayList(listProductos));
+    public void cargarTodosProductos() {
+    Query queryProductosFindAll = entityManager.createNamedQuery("Productos.findAll");
+    List<Productos> listProductos = queryProductosFindAll.getResultList();
+    tablaViewProductos.setItems(FXCollections.observableArrayList(listProductos));
     }
     
 }
