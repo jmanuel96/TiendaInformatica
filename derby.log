@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue May 14 18:14:11 CEST 2019:
- Iniciando instancia a816c00e-016a-b71f-6d61-000002b3ff80 de Derby, versión The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): 
+Wed May 15 00:12:47 CEST 2019:
+ Iniciando instancia a816c00e-016a-b867-baee-000002cb8cf0 de Derby, versión The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): 
 en el directorio de base de datos C:\Users\josemanuel\Desktop\nano programacion\Proyecto BaseDatos\TiendaInformatica\TiendaInformatica_Datos con el cargador de clases sun.misc.Launcher$AppClassLoader@6f94fa3e
 Cargado desde file:/C:/Program%20Files/glassfish-4.1.1/javadb/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -11,7 +11,7 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Cargador de clases de base de datos iniciado - derby.database.classpath=''
-Tue May 14 18:59:18 CEST 2019 Thread[JavaFX Application Thread,5,main] Cleanup action starting
+Wed May 15 00:13:55 CEST 2019 Thread[JavaFX Application Thread,5,main] Cleanup action starting
 java.sql.SQLException: No se ha encontrado la base de datos 'TiendaInformatica'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)

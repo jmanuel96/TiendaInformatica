@@ -42,22 +42,18 @@ public class TiendaViewController implements Initializable {
     private TableColumn<Productos, String> columnaNombre;
     @FXML
     private TableColumn<Productos, String> columnaDescripcion;
-    @FXML
-    private TableColumn<Productos, BigDecimal> columnaPrecio;
-    @FXML
-    private TableColumn<Productos, String> columnaCategoria;
+//    @FXML
+//    private TableColumn<Productos, BigDecimal> columnaPrecio;
+//    @FXML
+//    private TableColumn<Productos, String> columnaCategoria;
     @FXML
     private TextField textFieldNombre;
     @FXML
     private TextField textFieldDescripcion;
     @FXML
-    private TextField textFieldPrecio;
-    @FXML
-    private ComboBox<Categorias> comboBoxCategoria;
-    @FXML
-    private Button botonGuardar;
-    @FXML
-    private Button botonDeshacer;
+//    private TableColumn<?, ?> columnaPrecio;
+//    @FXML
+//    private TableColumn<?, ?> columnaCategoria;
 
     
     public void setEntityManager(EntityManager entityManager) {
@@ -72,15 +68,15 @@ public class TiendaViewController implements Initializable {
         // TODO
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         columnaDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        columnaPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        columnaCategoria.setCellValueFactory(
-        cellData -> {
-            SimpleStringProperty property = new SimpleStringProperty();
-            if (cellData.getValue().getIdcategoria()!= null) {
-                property.setValue(cellData.getValue().getIdcategoria().getNombre());
-            }
-            return property;
-        });
+//        columnaPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+//        columnaCategoria.setCellValueFactory(
+//        cellData -> {
+//            SimpleStringProperty property = new SimpleStringProperty();
+//            if (cellData.getValue().getIdcategoria()!= null) {
+//                property.setValue(cellData.getValue().getIdcategoria().getNombre());
+//            }
+//            return property;
+//        });
     
 
         tablaViewProductos.getSelectionModel().selectedItemProperty().addListener(
@@ -116,6 +112,7 @@ public class TiendaViewController implements Initializable {
     tablaViewProductos.setItems(FXCollections.observableArrayList(listProductos));
     }
 
+
     @FXML
     private void onActionBotonGuardar(ActionEvent event) {
         if (productoSeleccionado != null) {
@@ -134,13 +131,9 @@ public class TiendaViewController implements Initializable {
         tablaViewProductos.requestFocus();
         
         }
-        
     }
+
         
 
-    @FXML
-    private void onActionBotonDeshacer(ActionEvent event) {
-        
-    }
     
 }
