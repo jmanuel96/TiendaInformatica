@@ -5,6 +5,7 @@
  */
 package tiendainformatica;
 
+import BaseDatos.Categorias;
 import BaseDatos.Productos;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -16,7 +17,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -50,11 +53,12 @@ public class TiendaViewController implements Initializable {
     @FXML
     private TextField textFieldPrecio;
     @FXML
-    private TextField textFieldCategoria;
+    private ComboBox<Categorias> comboBoxCategoria;
     @FXML
     private Button botonGuardar;
     @FXML
     private Button botonDeshacer;
+
     
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -84,15 +88,25 @@ public class TiendaViewController implements Initializable {
             productoSeleccionado = newValue;
              if (productoSeleccionado != null) {
                 textFieldNombre.setText(productoSeleccionado.getNombre());
+             }
+             else {
+                 textFieldNombre.setText("");
+             }
+             if (productoSeleccionado != null) {
                 textFieldDescripcion.setText(productoSeleccionado.getDescripcion());
-                textFieldPrecio.setText(productoSeleccionado.getPrecio());
-                textFieldCategoria.setText(productoSeleccionado.getCategoria());
-            } else {
-                textFieldNombre.setText("");
+             }
+             else {
                 textFieldDescripcion.setText("");
+             }
+             if (productoSeleccionado != null) { 
+                textFieldPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+             }
+             else {
                 textFieldPrecio.setText("");
-                textFieldCategoria.setText("");
-            }
+             }
+             if (productoSeleccionado.getIdcategoria() != null) {
+                comboBoxCategoria.setValue(productoSeleccionado.getIdcategoria());
+             }
         });
     }
     
@@ -104,10 +118,29 @@ public class TiendaViewController implements Initializable {
 
     @FXML
     private void onActionBotonGuardar(ActionEvent event) {
+        if (productoSeleccionado != null) {
+        productoSeleccionado.setNombre(textFieldNombre.getText());
+        productoSeleccionado.setDescripcion(textFieldDescripcion.getText());
+//        textFieldPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+//        comboBoxCategoria.setValue(productoSeleccionado.getIdcategoria());
+        entityManager.getTransaction().begin();
+        entityManager.merge(productoSeleccionado);
+        entityManager.getTransaction().commit();
+
+        int numFilaSeleccionada = tablaViewProductos.getSelectionModel().getSelectedIndex();
+        tablaViewProductos.getItems().set(numFilaSeleccionada, productoSeleccionado);
+        TablePosition pos = new TablePosition(tablaViewProductos, numFilaSeleccionada, null);
+        tablaViewProductos.getFocusModel().focus(pos);
+        tablaViewProductos.requestFocus();
+        
+        }
+        
     }
+        
 
     @FXML
     private void onActionBotonDeshacer(ActionEvent event) {
+        
     }
     
 }
