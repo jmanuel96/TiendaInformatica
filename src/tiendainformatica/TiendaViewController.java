@@ -50,11 +50,6 @@ public class TiendaViewController implements Initializable {
     private TextField textFieldNombre;
     @FXML
     private TextField textFieldDescripcion;
-    @FXML
-//    private TableColumn<?, ?> columnaPrecio;
-//    @FXML
-//    private TableColumn<?, ?> columnaCategoria;
-
     
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
