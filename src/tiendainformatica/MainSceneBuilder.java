@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -34,23 +35,21 @@ public class MainSceneBuilder extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         
+        StackPane rootMain = new StackPane();
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TiendaView.fxml"));
-        Parent sceneBuilder = fxmlLoader.load();
+        Pane rootTiendaView = fxmlLoader.load();
+        rootMain.getChildren().add(rootTiendaView);
         
         emf = Persistence.createEntityManagerFactory("TiendaInformaticaPU");
         em = emf.createEntityManager();
         
         TiendaViewController tiendaViewController = (TiendaViewController) fxmlLoader.getController();
-        
         // Después de obtener el objeto del controlador y del EntityManager:
         tiendaViewController.setEntityManager(em);
         tiendaViewController.cargarTodosProductos();
         
-        
-        StackPane root = new StackPane();
-        
-        Scene scene = new Scene(root, 900, 500);
-        root.getChildren().add(sceneBuilder);
+        Scene scene = new Scene(rootMain, 900, 500);
         
         primaryStage.setTitle("Tienda Informática");
         primaryStage.setScene(scene);

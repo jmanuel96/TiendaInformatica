@@ -7,15 +7,20 @@ package tiendainformatica;
 
 import BaseDatos.Categorias;
 import BaseDatos.Productos;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -23,6 +28,8 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -50,6 +57,8 @@ public class TiendaViewController implements Initializable {
     private TextField textFieldNombre;
     @FXML
     private TextField textFieldDescripcion;
+    @FXML
+    private AnchorPane rootTiendaView;
     
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -126,6 +135,19 @@ public class TiendaViewController implements Initializable {
         tablaViewProductos.requestFocus();
         
         }
+    }
+
+    @FXML
+    private void onActionBotonNuevo(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void onActionBotonEditar(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBotonDeshacer(ActionEvent event) {
     }
 
         
