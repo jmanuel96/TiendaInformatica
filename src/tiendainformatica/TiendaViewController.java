@@ -139,7 +139,25 @@ public class TiendaViewController implements Initializable {
 
     @FXML
     private void onActionBotonNuevo(ActionEvent event) {
-        
+        try {
+            // Cargar la vista de detalle
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DetallesProducyosController.fxml"));
+            Parent rootDetalleView = fxmlLoader.load();     
+
+            // Ocultar la vista de la lista
+            rootTiendaView.setVisible(false);
+	
+            // Añadir la vista de detalle al StackPane principal para que se muestre
+            StackPane rootMain = (StackPane)rootTiendaView.getScene().getRoot();
+            rootMain.getChildren().add(rootDetalleView);
+            
+            rootTiendaView.setVisible(true);
+            
+            DetallesProducyosController detallesProducyosController = (DetallesProducyosController) fxmlLoader.getController();  
+            detallesProducyosController.setRootTiendaView(rootTiendaView);
+        } catch (IOException ex) {
+            Logger.getLogger(TiendaViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

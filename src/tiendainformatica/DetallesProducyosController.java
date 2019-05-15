@@ -16,6 +16,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -40,6 +41,8 @@ public class DetallesProducyosController implements Initializable {
     private ComboBox<?> comboBoxCategoria;
     @FXML
     private Button imageViewFoto;
+    
+    private Pane rootTiendaView;
 
     /**
      * Initializes the controller class.
@@ -47,7 +50,11 @@ public class DetallesProducyosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
+    
+    public void setRootTiendaView(Pane rootTiendaView) {
+    this.rootTiendaView = rootTiendaView;
+}
 
     @FXML
     private void onActionBotonGuardar(ActionEvent event) {
