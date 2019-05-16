@@ -117,7 +117,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="rootTiendaView" mnemonicParsing="false" onAction="#onActionBotonEditar" prefHeight="40.0" prefWidth="100.0" text="Editar">
+                  <Button mnemonicParsing="false" onAction="#onActionBotonEditar" prefHeight="40.0" prefWidth="100.0" text="Editar">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>

@@ -49,7 +49,7 @@ public class MainSceneBuilder extends Application {
         tiendaViewController.setEntityManager(em);
         tiendaViewController.cargarTodosProductos();
         
-        Scene scene = new Scene(rootMain, 900, 500);
+        Scene scene = new Scene(rootMain, 950, 600);
         
         primaryStage.setTitle("Tienda Informática");
         primaryStage.setScene(scene);

@@ -141,7 +141,7 @@ public class TiendaViewController implements Initializable {
     private void onActionBotonNuevo(ActionEvent event) {
         try {
             // Cargar la vista de detalle
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DetallesProducyosController.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DetallesProducyos.fxml"));
             Parent rootDetalleView = fxmlLoader.load();     
 
             // Ocultar la vista de la lista
@@ -151,10 +151,17 @@ public class TiendaViewController implements Initializable {
             StackPane rootMain = (StackPane)rootTiendaView.getScene().getRoot();
             rootMain.getChildren().add(rootDetalleView);
             
-            rootTiendaView.setVisible(true);
+            
+            rootTiendaView.setVisible(false);
             
             DetallesProducyosController detallesProducyosController = (DetallesProducyosController) fxmlLoader.getController();  
             detallesProducyosController.setRootTiendaView(rootTiendaView);
+            detallesProducyosController.setTableViewPrevio(tablaViewProductos);
+            detallesProducyosController.mostrarDatos();
+            // Para el botón Nuevo:
+        productoSeleccionado = new Productos();
+        detallesProducyosController.setProducto(entityManager, productoSeleccionado, true);
+            
         } catch (IOException ex) {
             Logger.getLogger(TiendaViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -162,6 +169,33 @@ public class TiendaViewController implements Initializable {
 
     @FXML
     private void onActionBotonEditar(ActionEvent event) {
+        if(productoSeleccionado != null) {
+            try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DetallesProducyos.fxml"));
+            Parent rootDetalleView = fxmlLoader.load();     
+
+            // Ocultar la vista de la lista
+            rootTiendaView.setVisible(false);
+	
+            // Añadir la vista de detalle al StackPane principal para que se muestre
+            StackPane rootMain = (StackPane)rootTiendaView.getScene().getRoot();
+            rootMain.getChildren().add(rootDetalleView);
+            
+            
+            rootTiendaView.setVisible(false);
+            
+            DetallesProducyosController detallesProducyosController = (DetallesProducyosController) fxmlLoader.getController();  
+            detallesProducyosController.setRootTiendaView(rootTiendaView);
+            detallesProducyosController.setTableViewPrevio(tablaViewProductos);
+            // Para el botón Editar:
+            detallesProducyosController.setProducto(entityManager, productoSeleccionado, false);
+            detallesProducyosController.mostrarDatos();
+  
+            
+        } catch (IOException ex) {
+            Logger.getLogger(TiendaViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
     }
 
     @FXML
