@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -103,12 +104,33 @@ public class DetallesProducyosController implements Initializable {
         }
         entityManager.getTransaction().commit();
         
+        int numFilaSeleccionada;
+        if(nuevoProducto) {
+            tableViewPrevio.getItems().add(producto);
+            numFilaSeleccionada = tableViewPrevio.getItems().size() - 1;
+            tableViewPrevio.getSelectionModel().select(numFilaSeleccionada);
+            tableViewPrevio.scrollTo(numFilaSeleccionada);
+        } else {
+            numFilaSeleccionada = tableViewPrevio.getSelectionModel().getSelectedIndex();
+            tableViewPrevio.getItems().set(numFilaSeleccionada, producto);
+        }
+        TablePosition pos = new TablePosition(tableViewPrevio, numFilaSeleccionada, null);
+        tableViewPrevio.getFocusModel().focus(pos);
+        tableViewPrevio.requestFocus();
+        
     }
 
     @FXML
     private void onActionBotonCancelar(ActionEvent event) {
         StackPane rootMain = (StackPane)rootDetalleView.getScene().getRoot();
-        rootMain.getChildren().remove(rootDetalleView);      
+        rootMain.getChildren().remove(rootDetalleView);
+        
+        entityManager.getTransaction().rollback();
+
+        int numFilaSeleccionada = tableViewPrevio.getSelectionModel().getSelectedIndex();
+        TablePosition pos = new TablePosition(tableViewPrevio, numFilaSeleccionada, null);
+        tableViewPrevio.getFocusModel().focus(pos);
+        tableViewPrevio.requestFocus();
   
         rootTiendaView.setVisible(true);
     }
