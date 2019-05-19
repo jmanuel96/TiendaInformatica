@@ -152,15 +152,14 @@ public class TiendaViewController implements Initializable {
             rootMain.getChildren().add(rootDetalleView);
             
             
-            rootTiendaView.setVisible(false);
             
             DetallesProducyosController detallesProducyosController = (DetallesProducyosController) fxmlLoader.getController();  
             detallesProducyosController.setRootTiendaView(rootTiendaView);
             detallesProducyosController.setTableViewPrevio(tablaViewProductos);
-            detallesProducyosController.mostrarDatos();
             // Para el botón Nuevo:
-        productoSeleccionado = new Productos();
-        detallesProducyosController.setProducto(entityManager, productoSeleccionado, true);
+            productoSeleccionado = new Productos();
+            detallesProducyosController.setProducto(entityManager, productoSeleccionado, true);
+            detallesProducyosController.mostrarDatos();
             
         } catch (IOException ex) {
             Logger.getLogger(TiendaViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -182,7 +181,6 @@ public class TiendaViewController implements Initializable {
             rootMain.getChildren().add(rootDetalleView);
             
             
-            rootTiendaView.setVisible(false);
             
             DetallesProducyosController detallesProducyosController = (DetallesProducyosController) fxmlLoader.getController();  
             detallesProducyosController.setRootTiendaView(rootTiendaView);

@@ -117,6 +117,8 @@ public class DetallesProducyosController implements Initializable {
         TablePosition pos = new TablePosition(tableViewPrevio, numFilaSeleccionada, null);
         tableViewPrevio.getFocusModel().focus(pos);
         tableViewPrevio.requestFocus();
+        rootTiendaView.setVisible(true);
+        rootDetalleView.setVisible(false);
         
     }
 
