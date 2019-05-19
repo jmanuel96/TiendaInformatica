@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -198,6 +202,31 @@ public class TiendaViewController implements Initializable {
 
     @FXML
     private void onActionBotonDeshacer(ActionEvent event) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar");
+        alert.setHeaderText("¿Desea deshacer el siguiente registro?");
+        alert.setContentText(productoSeleccionado.getNombre() + " "
+                + productoSeleccionado.getDescripcion());
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // Acciones a realizar si el usuario acepta
+            entityManager.getTransaction().begin();
+            entityManager.merge(productoSeleccionado);
+            entityManager.remove(productoSeleccionado);
+            entityManager.getTransaction().commit();
+
+            tablaViewProductos.getItems().remove(productoSeleccionado);
+
+            tablaViewProductos.getFocusModel().focus(null);
+            tablaViewProductos.requestFocus();
+        } else {
+            // Acciones a realizar si el usuario cancela
+            int numFilaSeleccionada = tablaViewProductos.getSelectionModel().getSelectedIndex();
+            tablaViewProductos.getItems().set(numFilaSeleccionada, productoSeleccionado);
+            TablePosition pos = new TablePosition(tablaViewProductos, numFilaSeleccionada, null);
+            tablaViewProductos.getFocusModel().focus(pos);
+            tablaViewProductos.requestFocus();    
+        }
     }
 
         
