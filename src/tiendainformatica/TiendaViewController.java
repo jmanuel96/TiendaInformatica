@@ -53,10 +53,10 @@ public class TiendaViewController implements Initializable {
     private TableColumn<Productos, String> columnaNombre;
     @FXML
     private TableColumn<Productos, String> columnaDescripcion;
-//    @FXML
-//    private TableColumn<Productos, BigDecimal> columnaPrecio;
-//    @FXML
-//    private TableColumn<Productos, String> columnaCategoria;
+    @FXML
+    private TableColumn<Productos, BigDecimal> columnaPrecio;
+    @FXML
+    private TableColumn<Productos, String> columnaCategoria;
     @FXML
     private TextField textFieldNombre;
     @FXML
@@ -99,6 +99,9 @@ public class TiendaViewController implements Initializable {
              if (productoSeleccionado != null) {
                 textFieldDescripcion.setText(productoSeleccionado.getDescripcion());
              }
+//             if (productoSeleccionado != null) {
+//                 columnaPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+//             }
 //             else {
 //                textFieldDescripcion.setText("");
 //             }
@@ -127,6 +130,7 @@ public class TiendaViewController implements Initializable {
         productoSeleccionado.setNombre(textFieldNombre.getText());
         productoSeleccionado.setDescripcion(textFieldDescripcion.getText());
 //        textFieldPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+
 //        comboBoxCategoria.setValue(productoSeleccionado.getIdcategoria());
         entityManager.getTransaction().begin();
         entityManager.merge(productoSeleccionado);

@@ -5,7 +5,9 @@
  */
 package tiendainformatica;
 
+import BaseDatos.Categorias;
 import BaseDatos.Productos;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -49,7 +51,7 @@ public class DetallesProducyosController implements Initializable {
     @FXML
     private DatePicker datePickerFechaSalida;
     @FXML
-    private ComboBox<?> comboBoxCategoria;
+    private ComboBox<Categorias> comboBoxCategoria;
     @FXML
     private Button imageViewFoto;
     
@@ -87,6 +89,9 @@ public class DetallesProducyosController implements Initializable {
     public void mostrarDatos() {
     textFieldNombre.setText(producto.getNombre());
     textAreaDescripcion.setText(producto.getDescripcion());
+    if (producto.getPrecio() != null) { 
+        textFieldPrecio.setText(String.valueOf(producto.getPrecio()));
+             }
 //    textFieldTelefono.setText(persona.getTelefono());
 //    textFieldEMail.setText(persona.getEmail());
     // Falta implementar el código para el resto de controles
@@ -96,6 +101,8 @@ public class DetallesProducyosController implements Initializable {
     private void onActionBotonGuardar(ActionEvent event) {
         producto.setNombre(textFieldNombre.getText());
         producto.setDescripcion(textAreaDescripcion.getText());
+//        producto.setPrecio(BigDecimal.valueOf(Double.valueOf(textFieldPrecio.getText())));
+        
 
         if(nuevoProducto) {
             entityManager.persist(producto);
