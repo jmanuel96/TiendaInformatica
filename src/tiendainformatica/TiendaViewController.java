@@ -99,9 +99,9 @@ public class TiendaViewController implements Initializable {
              if (productoSeleccionado != null) {
                 textFieldDescripcion.setText(productoSeleccionado.getDescripcion());
              }
-//             if (productoSeleccionado != null) {
-//                 columnaPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
-//             }
+             if (productoSeleccionado != null) {
+                 columnaPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+             }
 //             else {
 //                textFieldDescripcion.setText("");
 //             }
