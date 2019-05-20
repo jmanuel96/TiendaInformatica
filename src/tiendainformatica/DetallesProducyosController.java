@@ -170,15 +170,18 @@ public class DetallesProducyosController implements Initializable {
 
     @FXML
     private void onActionBotonGuardar(ActionEvent event) {
+        int numFilaSeleccionada;
+        boolean errorFormato = false;
+        
         producto.setNombre(textFieldNombre.getText());
         producto.setDescripcion(textAreaDescripcion.getText());
 //        producto.setPrecio(BigDecimal.valueOf(Double.valueOf(textFieldPrecio.getText())));
-                if (!textFieldPrecio.getText().isEmpty()) {
+        if (!textFieldPrecio.getText().isEmpty()) {
             try {
                 producto.setPrecio(BigDecimal.valueOf(Double.valueOf(textFieldPrecio.getText()).doubleValue()));
             } catch (NumberFormatException ex) {
                 errorFormato = true;
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Salario no válido");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Expresión no valida");
                 alert.showAndWait();
                 textFieldPrecio.requestFocus();
             }
@@ -191,7 +194,7 @@ public class DetallesProducyosController implements Initializable {
         }
         entityManager.getTransaction().commit();
         
-        int numFilaSeleccionada;
+
         if(nuevoProducto) {
             tableViewPrevio.getItems().add(producto);
             numFilaSeleccionada = tableViewPrevio.getItems().size() - 1;
