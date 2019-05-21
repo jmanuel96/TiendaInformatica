@@ -22,7 +22,7 @@
    <children>
       <HBox layoutX="174.0" layoutY="260.0" prefHeight="135.0" prefWidth="174.0" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="260.0">
          <children>
-            <ImageView fitHeight="134.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageViewFoto" fitHeight="134.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
       <VBox prefHeight="401.0" prefWidth="600.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
@@ -156,7 +156,7 @@
                         </RadioButton>
                         <DatePicker fx:id="datePickerFechaSalida" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <ComboBox fx:id="comboBoxCategoria" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Button fx:id="imageViewFoto" mnemonicParsing="false" text="Examinar" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <Button mnemonicParsing="false" onAction="#onActionButtonExaminar" text="Examinar" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <font>
                               <Font name="Times New Roman" size="14.0" />
                            </font>

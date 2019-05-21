@@ -7,8 +7,12 @@ package tiendainformatica;
 
 import BaseDatos.Categorias;
 import BaseDatos.Productos;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -31,9 +35,12 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -52,6 +59,8 @@ public class DetallesProducyosController implements Initializable {
     
     public static final char NUEVO = 'N';
     public static final char USADO = 'U';
+    
+    public static final String CARPETA_FOTOS = "Fotos";
 
     @FXML
     private TextField textFieldNombre;
@@ -68,7 +77,7 @@ public class DetallesProducyosController implements Initializable {
     @FXML
     private ComboBox<Categorias> comboBoxCategoria;
     @FXML
-    private Button imageViewFoto;
+    private ImageView imageViewFoto;
     
     private Pane rootTiendaView;
     @FXML
@@ -108,15 +117,13 @@ public class DetallesProducyosController implements Initializable {
         if (producto.getPrecio() != null) { 
             textFieldPrecio.setText(String.valueOf(producto.getPrecio()));
         }
-//        if (producto.getEstado() != null) {
-//            
-//        switch (producto.getEstado()) {
-//            case NUEVO:
-//                radioBotonNuevo.setSelected(true);
-//                break;
-//            case USADO:
-//                radioBotonUsado.setSelected(true);
-//                break;
+        
+//        if (producto.getEstado() != null) {        
+//            if (radioBotonNuevo.isSelected()){
+//               producto.setEstado() = NUEVO;
+//               else {
+//                producto.setEstado() = USADO;
+//               }
 //            }
 //        }
 
@@ -162,10 +169,19 @@ public class DetallesProducyosController implements Initializable {
                 return null;
             }
         });
-//    textFieldTelefono.setText(persona.getTelefono());
-//    textFieldEMail.setText(persona.getEmail());
+                if (producto.getFoto() != null) {
+            String imageFileName = producto.getFoto();
+            File file = new File(CARPETA_FOTOS + "/" + imageFileName);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+                imageViewFoto.setImage(image);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "No se encuentra la imagen");
+                alert.showAndWait();
+            }
+        }
 
-    // Falta implementar el código para el resto de controles
+
     }
 
     @FXML
@@ -175,7 +191,6 @@ public class DetallesProducyosController implements Initializable {
         
         producto.setNombre(textFieldNombre.getText());
         producto.setDescripcion(textAreaDescripcion.getText());
-//        producto.setPrecio(BigDecimal.valueOf(Double.valueOf(textFieldPrecio.getText())));
         if (!textFieldPrecio.getText().isEmpty()) {
             try {
                 producto.setPrecio(BigDecimal.valueOf(Double.valueOf(textFieldPrecio.getText()).doubleValue()));
@@ -185,6 +200,27 @@ public class DetallesProducyosController implements Initializable {
                 alert.showAndWait();
                 textFieldPrecio.requestFocus();
             }
+        }
+//        if (radioBotonNuevo.isSelected()) {
+//            producto.setEstado(NUEVO);
+//        } else if (radioBotonUsado.isSelected()) {
+//            producto.setEstado(USADO);
+
+        if (comboBoxCategoria.getValue() != null) {
+            producto.setIdcategoria(comboBoxCategoria.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Debe indicar una categoria");
+            alert.showAndWait();
+            errorFormato = true;
+        }
+        if (datePickerFechaSalida.getValue() != null) {
+            LocalDate localDate = datePickerFechaSalida.getValue();
+            ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+            Instant instant = zonedDateTime.toInstant();
+            Date date = Date.from(instant);
+            producto.setFechasalida(date);
+        } else {
+            producto.setFechasalida(null);
         }
 
         if(nuevoProducto) {
@@ -226,5 +262,33 @@ public class DetallesProducyosController implements Initializable {
   
         rootTiendaView.setVisible(true);
     }
-    
-}
+
+    @FXML
+    private void onActionButtonExaminar(ActionEvent event) {
+        File carpetaFotos = new File(CARPETA_FOTOS);
+        if (!carpetaFotos.exists()) {
+            carpetaFotos.mkdir();
+        }
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+        fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("Imágenes (jpg, png)", "*.jpg", "*.png"),
+        new FileChooser.ExtensionFilter("Todos los archivos", "*.*")
+        );
+        File file = fileChooser.showOpenDialog(rootDetalleView.getScene().getWindow());
+        if (file != null) {
+            try {
+                Files.copy(file.toPath(), new File(CARPETA_FOTOS + "/" + file.getName()).toPath());
+                producto.setFoto(file.getName());
+                Image image = new Image(file.toURI().toString());
+                imageViewFoto.setImage(image);
+            } catch (FileAlreadyExistsException ex) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Nombre de archivo duplicado");
+                alert.showAndWait();
+            } catch (IOException ex) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "No se ha podido guardar la imagen");
+                alert.showAndWait();
+            }
+        }
+    }
+    }

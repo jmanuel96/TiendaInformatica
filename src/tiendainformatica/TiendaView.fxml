@@ -129,7 +129,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onActionBotonDeshacer" prefHeight="40.0" prefWidth="100.0" text="Deshacer">
+                  <Button mnemonicParsing="false" onAction="#onActionBotonBorrar" prefHeight="40.0" prefWidth="100.0" text="Borrar">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>

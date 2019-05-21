@@ -76,16 +76,15 @@ public class TiendaViewController implements Initializable {
         // TODO
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         columnaDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-//        columnaPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-//        columnaCategoria.setCellValueFactory(
-//        cellData -> {
-//            SimpleStringProperty property = new SimpleStringProperty();
-//            if (cellData.getValue().getIdcategoria()!= null) {
-//                property.setValue(cellData.getValue().getIdcategoria().getNombre());
-//            }
-//            return property;
-//        });
-    
+        columnaPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        columnaCategoria.setCellValueFactory(
+        cellData -> {
+            SimpleStringProperty property = new SimpleStringProperty();
+            if (cellData.getValue().getIdcategoria()!= null) {
+                property.setValue(cellData.getValue().getIdcategoria().getNombre());
+            }
+            return property;
+        });
 
         tablaViewProductos.getSelectionModel().selectedItemProperty().addListener(
         (observable, oldValue, newValue) -> {
@@ -99,9 +98,9 @@ public class TiendaViewController implements Initializable {
              if (productoSeleccionado != null) {
                 textFieldDescripcion.setText(productoSeleccionado.getDescripcion());
              }
-             if (productoSeleccionado != null) {
-                 columnaPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
-             }
+//             if (productoSeleccionado != null) {
+//                 columnaPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+//             }
 //             else {
 //                textFieldDescripcion.setText("");
 //             }
@@ -130,7 +129,7 @@ public class TiendaViewController implements Initializable {
         productoSeleccionado.setNombre(textFieldNombre.getText());
         productoSeleccionado.setDescripcion(textFieldDescripcion.getText());
 //        textFieldPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
-
+//
 //        comboBoxCategoria.setValue(productoSeleccionado.getIdcategoria());
         entityManager.getTransaction().begin();
         entityManager.merge(productoSeleccionado);
@@ -201,11 +200,18 @@ public class TiendaViewController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TiendaViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Atención");
+            alert.setHeaderText("Debe seleccionar un registro");
+            alert.showAndWait();
         }
     }
 
+
     @FXML
-    private void onActionBotonDeshacer(ActionEvent event) {
+    private void onActionBotonBorrar(ActionEvent event) {
+        if(productoSeleccionado != null) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmar");
         alert.setHeaderText("¿Desea deshacer el siguiente registro?");
@@ -231,6 +237,15 @@ public class TiendaViewController implements Initializable {
             tablaViewProductos.getFocusModel().focus(pos);
             tablaViewProductos.requestFocus();    
         }
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Atención");
+            alert.setHeaderText("Debe seleccionar un registro");
+            alert.showAndWait();
+        }
+        
+        
+        
     }
 
         
