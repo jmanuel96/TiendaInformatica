@@ -59,6 +59,8 @@ public class DetallesProducyosController implements Initializable {
     
     public static final char NUEVO = 'N';
     public static final char USADO = 'U';
+    public static final char REPARADO = 'R';
+
     
     public static final String CARPETA_FOTOS = "Fotos";
 
@@ -73,6 +75,8 @@ public class DetallesProducyosController implements Initializable {
     @FXML
     private RadioButton radioBotonUsado;
     @FXML
+    private RadioButton radioBotonReparado;
+    @FXML
     private DatePicker datePickerFechaSalida;
     @FXML
     private ComboBox<Categorias> comboBoxCategoria;
@@ -82,6 +86,7 @@ public class DetallesProducyosController implements Initializable {
     private Pane rootTiendaView;
     @FXML
     private AnchorPane rootDetalleView;
+    
 
     /**
      * Initializes the controller class.
@@ -117,6 +122,19 @@ public class DetallesProducyosController implements Initializable {
         if (producto.getPrecio() != null) { 
             textFieldPrecio.setText(String.valueOf(producto.getPrecio()));
         }
+//        if (producto.getEstado() != null) {
+//            switch (producto.getEstado()) {
+//            case NUEVO:
+//                radioBotonNuevo.setSelected(true);
+//                break;
+//            case USADO:
+//                radioBotonUsado.setSelected(true);
+//                break;
+//            case REPARADO:
+//                radioBotonReparado.setSelected(true);
+//                break;
+//    }
+//}
         
 //        if (producto.getEstado() != null) {        
 //            if (radioBotonNuevo.isSelected()){
