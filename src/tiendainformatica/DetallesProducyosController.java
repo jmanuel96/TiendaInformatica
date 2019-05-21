@@ -128,15 +128,6 @@ public class DetallesProducyosController implements Initializable {
                 
     } catch (Exception e){}
 
-        
-//        if (producto.getEstado() != null) {        
-//            if (radioBotonNuevo.isSelected()){
-//               producto.setEstado() = NUEVO;
-//               else {
-//                producto.setEstado() = USADO;
-//               }
-//            }
-//        }
 
         if (producto.getFechasalida()!= null) {
             Date date = producto.getFechasalida();
@@ -179,8 +170,8 @@ public class DetallesProducyosController implements Initializable {
             public Categorias fromString(String userId) {
                 return null;
             }
-        });
-                if (producto.getFoto() != null) {
+            });
+            if (producto.getFoto() != null) {
             String imageFileName = producto.getFoto();
             File file = new File(CARPETA_FOTOS + "/" + imageFileName);
             if (file.exists()) {
@@ -213,8 +204,7 @@ public class DetallesProducyosController implements Initializable {
             }
         }
         try {
-            
-        
+
         if (radioBotonNuevo.isSelected()) {
             producto.setEstado(true);
         } else if (radioBotonUsado.isSelected()) {
@@ -308,4 +298,4 @@ public class DetallesProducyosController implements Initializable {
             }
         }
     }
-    }
+}

@@ -45,6 +45,7 @@ public class MainSceneBuilder extends Application {
         em = emf.createEntityManager();
         
         TiendaViewController tiendaViewController = (TiendaViewController) fxmlLoader.getController();
+        
         // Después de obtener el objeto del controlador y del EntityManager:
         tiendaViewController.setEntityManager(em);
         tiendaViewController.cargarTodosProductos();
