@@ -98,21 +98,6 @@ public class TiendaViewController implements Initializable {
              if (productoSeleccionado != null) {
                 textFieldDescripcion.setText(productoSeleccionado.getDescripcion());
              }
-//             if (productoSeleccionado != null) {
-//                 columnaPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
-//             }
-//             else {
-//                textFieldDescripcion.setText("");
-//             }
-//             if (productoSeleccionado != null) { 
-//                textFieldPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
-//             }
-//             else {
-//                textFieldPrecio.setText("");
-//             }
-//             if (productoSeleccionado.getIdcategoria() != null) {
-//                comboBoxCategoria.setValue(productoSeleccionado.getIdcategoria());
-//             }
         });
     }
     
