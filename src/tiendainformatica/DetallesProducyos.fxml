@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -138,22 +139,6 @@
                         <TextField fx:id="textFieldNombre" GridPane.columnIndex="1" />
                         <TextArea fx:id="textAreaDescripcion" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="textFieldPrecio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <RadioButton fx:id="radioBotonNuevo" mnemonicParsing="false" text="Nuevo" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="30.0" />
-                           </padding>
-                        </RadioButton>
-                        <RadioButton fx:id="radioBotonUsado" mnemonicParsing="false" text="Usado" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="140.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
-                           </font>
-                        </RadioButton>
                         <DatePicker fx:id="datePickerFechaSalida" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <ComboBox fx:id="comboBoxCategoria" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Button mnemonicParsing="false" onAction="#onActionButtonExaminar" text="Examinar" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -164,14 +149,16 @@
                               <Insets left="150.0" />
                            </GridPane.margin>
                         </Button>
-                        <RadioButton fx:id="radioBotonReparado" mnemonicParsing="false" text="Reparado" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="240.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
-                           </font>
-                        </RadioButton>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <RadioButton fx:id="radioBotonNuevo" mnemonicParsing="false" text="Nuevo">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="estadoCivilGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="radioBotonUsado" mnemonicParsing="false" text="Usado" toggleGroup="$estadoCivilGroup" />
+                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                </children>

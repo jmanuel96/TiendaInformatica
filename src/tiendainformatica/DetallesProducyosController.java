@@ -35,6 +35,7 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -56,10 +57,6 @@ public class DetallesProducyosController implements Initializable {
     private Productos producto;
     private boolean nuevoProducto;
     private EntityManager entityManager;
-    
-    public static final char NUEVO = 'N';
-    public static final char USADO = 'U';
-    public static final char REPARADO = 'R';
 
     
     public static final String CARPETA_FOTOS = "Fotos";
@@ -75,8 +72,6 @@ public class DetallesProducyosController implements Initializable {
     @FXML
     private RadioButton radioBotonUsado;
     @FXML
-    private RadioButton radioBotonReparado;
-    @FXML
     private DatePicker datePickerFechaSalida;
     @FXML
     private ComboBox<Categorias> comboBoxCategoria;
@@ -86,6 +81,8 @@ public class DetallesProducyosController implements Initializable {
     private Pane rootTiendaView;
     @FXML
     private AnchorPane rootDetalleView;
+    @FXML
+    private ToggleGroup estadoCivilGroup;
     
 
     /**
@@ -122,19 +119,15 @@ public class DetallesProducyosController implements Initializable {
         if (producto.getPrecio() != null) { 
             textFieldPrecio.setText(String.valueOf(producto.getPrecio()));
         }
-//        if (producto.getEstado() != null) {
-//            switch (producto.getEstado()) {
-//            case NUEVO:
-//                radioBotonNuevo.setSelected(true);
-//                break;
-//            case USADO:
-//                radioBotonUsado.setSelected(true);
-//                break;
-//            case REPARADO:
-//                radioBotonReparado.setSelected(true);
-//                break;
-//    }
-//}
+        try {
+            if (producto.getEstado()){
+                radioBotonNuevo.setSelected(true);
+            } else if (producto.getEstado()== false){
+                radioBotonUsado.setSelected(true);
+            }
+                
+    } catch (Exception e){}
+
         
 //        if (producto.getEstado() != null) {        
 //            if (radioBotonNuevo.isSelected()){
@@ -219,11 +212,17 @@ public class DetallesProducyosController implements Initializable {
                 textFieldPrecio.requestFocus();
             }
         }
-//        if (radioBotonNuevo.isSelected()) {
-//            producto.setEstado(NUEVO);
-//        } else if (radioBotonUsado.isSelected()) {
-//            producto.setEstado(USADO);
-
+        try {
+            
+        
+        if (radioBotonNuevo.isSelected()) {
+            producto.setEstado(true);
+        } else if (radioBotonUsado.isSelected()) {
+            producto.setEstado(false);
+        } 
+        } catch (Exception e){}
+        
+        
         if (comboBoxCategoria.getValue() != null) {
             producto.setIdcategoria(comboBoxCategoria.getValue());
         } else {
