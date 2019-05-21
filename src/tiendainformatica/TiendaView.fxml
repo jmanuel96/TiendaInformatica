@@ -22,9 +22,9 @@
             <TableView fx:id="tablaViewProductos" prefHeight="341.0" prefWidth="924.0">
               <columns>
                 <TableColumn fx:id="columnaNombre" prefWidth="172.0" text="Nombre" />
-                <TableColumn fx:id="columnaDescripcion" prefWidth="196.0" text="Descripción" />
-                  <TableColumn fx:id="columnaPrecio" prefWidth="223.66668701171875" text="Precio" />
-                  <TableColumn fx:id="columnaCategoria" prefWidth="331.33331298828125" text="Categoria" />
+                <TableColumn fx:id="columnaDescripcion" prefWidth="532.0" text="Descripción" />
+                  <TableColumn fx:id="columnaPrecio" prefWidth="98.0" text="Precio" />
+                  <TableColumn fx:id="columnaCategoria" prefWidth="123.33331298828125" text="Categoria" />
               </columns>
             </TableView>
             <GridPane prefHeight="185.0" prefWidth="487.0">
